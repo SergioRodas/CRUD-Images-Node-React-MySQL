@@ -85,12 +85,12 @@ function App() {
     <Fragment>
       <nav className="navbar navbar-dark bg-dark">
         <div className="container">
-          <a href="#!" className="navbar-brand">Image App</a>
+          <a href="/" className="navbar-brand">Image App</a>
         </div>
       </nav>
 
       <div className="container mt-5">
-        <div className="card p-3">
+        <div className="card p-3 Image-form">
           <div className="row d-flex justify-content-center">
             <div className="col-md-10 col-sm-12 my-2">
               <input id="fileinput" onChange={selectedHandler} className="form-control" type="file"/>
@@ -122,7 +122,7 @@ function App() {
       <Modal className="Modal" overlayClassName="Overlay" isOpen={modalIsOpen} onRequestClose={() => modalHandler(false, null)}>
         <div className="card Modal-container">
           <img className="Image-modal" src={PORT + currentImage} alt=""/>
-          <div className="card-body text-center">
+          <div className="card-body text-center Body-modal">
               <button onClick={() => deleteHandler()} className="btn btn-danger">Delete</button>
           </div>
         </div>

@@ -1,3 +1,7 @@
+.Image-form {
+    background-color: #326889ba;
+  }
+
 .Image-grid {
     display: -webkit-box; /* Not needed if autoprefixing */
     display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -12,7 +16,7 @@
  
   /* Style your items */
   .Image-grid-column > div { /* change div to reference your elements you put in <Masonry> */
-    background: grey;
+    background: #326889ba;
     margin-bottom: 30px;
 }
 
@@ -25,7 +29,7 @@
   margin-left: auto;
   margin-right: auto;
   border: 1px solid #ccc;
-  background: #fff;
+  background-color: #326889ba;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 4px;
@@ -44,5 +48,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rebeccapurple;
+  background-color: rgb(0 0 0 / 72%);
+}
+
+.Body-modal {
+  background-color: #1f2224;
 }
