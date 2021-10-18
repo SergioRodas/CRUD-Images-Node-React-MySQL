@@ -1,14 +1,29 @@
 import React, {Fragment, useEffect, useState} from 'react'
 import './App.css'
+import Masonry from 'react-masonry-css'
+import Modal from 'react-modal'
 
 const PORT = "http://localhost:9000/"
+
+const breakpointColumns = {
+  default: 4,
+  1100: 3,
+  700: 2,
+  500: 1
+}
 
 function App() {
   const [file, setFile] = useState(null)
   const [imageList, setImageList] = useState([])
   const [listUpdate, setListUpdate] = useState(false)
+  const [currentImage, setCurrentImage] = useState(null)
+
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
+
+    Modal.setAppElement('body')
+
     fetch(PORT + 'images/get')
     .then(res => res.json())
     .then(res => setImageList(res))
@@ -47,6 +62,11 @@ function App() {
     setFile(null)
   }
 
+  const modalHandler = (isOpen, image) => {
+    setModalIsOpen(isOpen)
+    setCurrentImage(image)
+  }
+
   return (
     <Fragment>
       <nav className="navbar navbar-dark bg-dark">
@@ -68,13 +88,53 @@ function App() {
         </div>
       </div>
 
-      <div className="m-5 Image-list">
+      <div className="Image-container m-5">
+      <Masonry
+        breakpointCols={breakpointColumns}
+        className="Image-grid"
+        columnClassName="Image-grid-column"
+      >
         {imageList.map(image => (
-          <div key={image} className="text-md-center">
-            <img  src={PORT + image} alt="" className="Image"/>
+          <div key={image} className="card Image-container text-md-center">
+            <img  src={PORT + image} alt={image} className="Image"/>
+            <div className="card-body">
+              <button className="btn btn-dark" onClick={() => modalHandler(true, image)}>Click to view</button>
+            </div>
           </div>
         ))}
+      </Masonry>
       </div>
+
+      <Modal style={{ overlay: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(255, 255, 255, 0.75)'
+    },
+    content: {
+      position: 'absolute',
+      top: '40px',
+      left: '40px',
+      right: '40px',
+      bottom: '40px',
+      border: '1px solid #ccc',
+      background: '#fff',
+      overflow: 'auto',
+      WebkitOverflowScrolling: 'touch',
+      borderRadius: '4px',
+      outline: 'none',
+      padding: '20px'
+    }}} isOpen={modalIsOpen} onRequestClose={() => modalHandler(false, null)}>
+        <div className="card Modal-container">
+          <img className="Image-modal" src={PORT + currentImage} alt=""/>
+          <div className="card-body">
+              <button className="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </Modal>
+
     </Fragment>
   )
 }

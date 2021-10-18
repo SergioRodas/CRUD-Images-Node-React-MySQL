@@ -1,12 +1,25 @@
-.Image-list {
-    columns: 5 280px;
-    column-gap: 1em;
+.Image-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
+  }
+  .Image-grid-column {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+  }
+ 
+  /* Style your items */
+  .Image-grid-column > div { /* change div to reference your elements you put in <Masonry> */
+    background: grey;
+    margin-bottom: 30px;
 }
 
-.Image {
-    max-width: 100%;
-    margin-bottom: 1em;
-    display: block;
-    outline: 2px solid #fff;
-    outline-offset: -5px;
+/* .Image-modal {
+    max-width: 500px;
 }
+
+.Modal-container {
+    max-width: 500px;
+} */
