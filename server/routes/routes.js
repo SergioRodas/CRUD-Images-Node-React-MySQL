@@ -6,6 +6,7 @@ const fs = require('fs')
 const router = express.Router()
 
 const diskStorage = multer.diskStorage({
+    // If it does not exist, create the images folder in the main directory of the project
     destination: path.join(__dirname, '../images'),
     filename: (req, file, cb) => {
        cb(null, Date.now() + '-' + file.originalname) 
@@ -33,6 +34,25 @@ router.post('/images/post', fileUpload.single('image'), (req, res) => {
             if (err) return res.status(500).send('server error')
 
             res.send('image saved!')
+        })
+    })
+})
+
+router.get('/images/get', (req, res) => {
+
+    req.getConnection((err, conn) => {
+        if (err) return res.status(500).send('server error')
+
+        conn.query('SELECT * FROM image', (err, rows) => {
+            if (err) return res.status(500).send('server error')
+            rows.map(img => {
+                // Loop through the rows of the image table and save each image in the dbimages folder using its 'data' property
+                fs.writeFileSync(path.join(__dirname, '../dbimages/' + img.id + '.png'), img.data)
+            })
+
+            const imageDir = fs.readdirSync(path.join(__dirname, '../dbimages/'))
+
+            res.json(imageDir)
         })
     })
 })
