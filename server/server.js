@@ -3,6 +3,7 @@ const mysql = require('mysql')
 const myConnectionDB = require('express-myconnection')
 const routes = require('./routes/routes')
 const cors = require('cors')
+const path = require('path')
 
 const app = express()
 
@@ -15,6 +16,9 @@ app.use(myConnectionDB(mysql, {
 }))
 
 app.use(cors())
+
+// define the dbimages folder as a static directory
+app.use(express.static(path.join(__dirname, 'dbimages')))
 
 app.use(routes)
 
