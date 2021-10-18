@@ -16,10 +16,33 @@
     margin-bottom: 30px;
 }
 
-/* .Image-modal {
-    max-width: 500px;
+.Modal {
+  position: absolute ;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  max-width: 60vw;
+  min-width: 250px;
+  max-height: 80vh;
+  margin: auto;
+  height: fit-content;
 }
 
-.Modal-container {
-    max-width: 500px;
-} */
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rebeccapurple;
+}

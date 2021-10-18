@@ -105,31 +105,10 @@ function App() {
       </Masonry>
       </div>
 
-      <Modal style={{ overlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(255, 255, 255, 0.75)'
-    },
-    content: {
-      position: 'absolute',
-      top: '40px',
-      left: '40px',
-      right: '40px',
-      bottom: '40px',
-      border: '1px solid #ccc',
-      background: '#fff',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
-      borderRadius: '4px',
-      outline: 'none',
-      padding: '20px'
-    }}} isOpen={modalIsOpen} onRequestClose={() => modalHandler(false, null)}>
+      <Modal className="Modal" overlayClassName="Overlay" isOpen={modalIsOpen} onRequestClose={() => modalHandler(false, null)}>
         <div className="card Modal-container">
           <img className="Image-modal" src={PORT + currentImage} alt=""/>
-          <div className="card-body">
+          <div className="card-body text-center">
               <button className="btn btn-danger">Delete</button>
           </div>
         </div>
