@@ -67,6 +67,20 @@ function App() {
     setCurrentImage(image)
   }
 
+  const deleteHandler = () => {
+    let imageID = currentImage.split('.') 
+    imageID = parseInt(imageID[0])
+
+    fetch(PORT + 'images/delete/' + imageID, {
+      method: 'DELETE'
+    })
+      .then(res => res.text())
+      .then(res=> console.log(res)) 
+    
+    setModalIsOpen(false, null)
+    setListUpdate(true)
+  }
+
   return (
     <Fragment>
       <nav className="navbar navbar-dark bg-dark">
@@ -109,7 +123,7 @@ function App() {
         <div className="card Modal-container">
           <img className="Image-modal" src={PORT + currentImage} alt=""/>
           <div className="card-body text-center">
-              <button className="btn btn-danger">Delete</button>
+              <button onClick={() => deleteHandler()} className="btn btn-danger">Delete</button>
           </div>
         </div>
       </Modal>
