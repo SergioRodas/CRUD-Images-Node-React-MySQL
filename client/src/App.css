@@ -1,0 +1,12 @@
+.Image-list {
+    columns: 5 280px;
+    column-gap: 1em;
+}
+
+.Image {
+    max-width: 100%;
+    margin-bottom: 1em;
+    display: block;
+    outline: 2px solid #fff;
+    outline-offset: -5px;
+}

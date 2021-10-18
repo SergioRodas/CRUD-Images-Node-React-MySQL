@@ -1,4 +1,7 @@
 import React, {Fragment, useEffect, useState} from 'react'
+import './App.css'
+
+const PORT = "http://localhost:9000/"
 
 function App() {
   const [file, setFile] = useState(null)
@@ -6,7 +9,7 @@ function App() {
   const [listUpdate, setListUpdate] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:9000/images/get')
+    fetch(PORT + 'images/get')
     .then(res => res.json())
     .then(res => setImageList(res))
     .catch(err => {
@@ -27,7 +30,7 @@ function App() {
     const formData = new FormData()
     formData.append('image', file)
 
-    fetch('http://localhost:9000/images/post', {
+    fetch(PORT + 'images/post', {
       method: 'POST',
       body: formData
     })
@@ -54,21 +57,21 @@ function App() {
 
       <div className="container mt-5">
         <div className="card p-3">
-          <div className="row">
-            <div className="col-10">
+          <div className="row d-flex justify-content-center">
+            <div className="col-md-10 col-sm-12 my-2">
               <input id="fileinput" onChange={selectedHandler} className="form-control" type="file"/>
             </div>
-            <div className="col-2">
+            <div className="col-md-2 col-sm-4 col-5 my-2">
               <button onClick={sendHandler} type="button" className="btn btn-primary col-12">Upload</button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="container mt-3" style={{display: "flex"}}>
+      <div className="m-5 Image-list">
         {imageList.map(image => (
-          <div key={image} className="card m-2">
-            <img  src={'http://localhost:9000/' + image} alt="" className="card-img-top" style={{height: "200px", width: "150px"}}/>
+          <div key={image} className="text-md-center">
+            <img  src={PORT + image} alt="" className="Image"/>
           </div>
         ))}
       </div>
